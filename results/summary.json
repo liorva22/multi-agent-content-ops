@@ -1,0 +1,167 @@
+[
+  {
+    "prd": "offline-notes",
+    "status": "published",
+    "retries": 0,
+    "steps": 5,
+    "tokens": 3237,
+    "cost_usd": 0.012707,
+    "rubric_score": 0.8571428571428571,
+    "rubric": {
+      "checks": {
+        "has_title": true,
+        "has_tldr": true,
+        "enough_sections": true,
+        "length_in_range": false,
+        "no_citation_markers": true,
+        "numbers_supported": true,
+        "readable": true
+      },
+      "score": 0.8571428571428571,
+      "word_count": 205,
+      "reading_ease": 60.7
+    },
+    "per_agent": {
+      "research": {
+        "calls": 1,
+        "tokens": 780,
+        "cost_usd": 0.0052,
+        "latency_ms": 4.1686999902594835
+      },
+      "write": {
+        "calls": 1,
+        "tokens": 1069,
+        "cost_usd": 0.004666,
+        "latency_ms": 0.6083000043872744
+      },
+      "fact_check": {
+        "calls": 1,
+        "tokens": 646,
+        "cost_usd": 0.002632,
+        "latency_ms": 0.741700001526624
+      },
+      "polish": {
+        "calls": 1,
+        "tokens": 742,
+        "cost_usd": 0.0002094,
+        "latency_ms": 0.18050000653602183
+      },
+      "score": {
+        "calls": 1,
+        "tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 2.74840000201948
+      }
+    }
+  },
+  {
+    "prd": "smart-inbox",
+    "status": "published",
+    "retries": 1,
+    "steps": 7,
+    "tokens": 5370,
+    "cost_usd": 0.022324,
+    "rubric_score": 0.8571428571428571,
+    "rubric": {
+      "checks": {
+        "has_title": true,
+        "has_tldr": true,
+        "enough_sections": true,
+        "length_in_range": false,
+        "no_citation_markers": true,
+        "numbers_supported": true,
+        "readable": true
+      },
+      "score": 0.8571428571428571,
+      "word_count": 217,
+      "reading_ease": 57.2
+    },
+    "per_agent": {
+      "research": {
+        "calls": 1,
+        "tokens": 824,
+        "cost_usd": 0.005464,
+        "latency_ms": 0.7874000002630055
+      },
+      "write": {
+        "calls": 2,
+        "tokens": 2324,
+        "cost_usd": 0.0102,
+        "latency_ms": 0.4435999726410955
+      },
+      "fact_check": {
+        "calls": 2,
+        "tokens": 1433,
+        "cost_usd": 0.006436,
+        "latency_ms": 1.0821000032592565
+      },
+      "polish": {
+        "calls": 1,
+        "tokens": 789,
+        "cost_usd": 0.0002241,
+        "latency_ms": 0.14200000441633165
+      },
+      "score": {
+        "calls": 1,
+        "tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 3.192300006048754
+      }
+    }
+  },
+  {
+    "prd": "usage-billing",
+    "status": "published",
+    "retries": 2,
+    "steps": 9,
+    "tokens": 6774,
+    "cost_usd": 0.028912,
+    "rubric_score": 0.8571428571428571,
+    "rubric": {
+      "checks": {
+        "has_title": true,
+        "has_tldr": true,
+        "enough_sections": true,
+        "length_in_range": false,
+        "no_citation_markers": true,
+        "numbers_supported": true,
+        "readable": true
+      },
+      "score": 0.8571428571428571,
+      "word_count": 211,
+      "reading_ease": 61.9
+    },
+    "per_agent": {
+      "research": {
+        "calls": 1,
+        "tokens": 739,
+        "cost_usd": 0.00475,
+        "latency_ms": 0.6404000159818679
+      },
+      "write": {
+        "calls": 3,
+        "tokens": 3220,
+        "cost_usd": 0.014336000000000002,
+        "latency_ms": 0.30700000934302807
+      },
+      "fact_check": {
+        "calls": 3,
+        "tokens": 2063,
+        "cost_usd": 0.009611999999999999,
+        "latency_ms": 0.8917000086512417
+      },
+      "polish": {
+        "calls": 1,
+        "tokens": 752,
+        "cost_usd": 0.000214,
+        "latency_ms": 0.06590000702999532
+      },
+      "score": {
+        "calls": 1,
+        "tokens": 0,
+        "cost_usd": 0.0,
+        "latency_ms": 0.8813999884296209
+      }
+    }
+  }
+]
