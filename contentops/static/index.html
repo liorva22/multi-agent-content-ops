@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Ops Pipeline</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --text:#1c2230; --muted:#687085; --line:#e2e5eb; --ok:#1a7f4b; --fail:#c0392b; --accent:#2f5bea; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:var(--bg); color:var(--text); }
+  header { padding:16px 24px; background:var(--card); border-bottom:1px solid var(--line); display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  h1 { font-size:18px; margin:0; } h2 { font-size:15px; margin:0 0 10px; } .muted { color:var(--muted); }
+  main { padding:20px 24px; display:grid; gap:16px; grid-template-columns:repeat(4, 1fr); max-width:1500px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; min-width:0; }
+  .wide { grid-column:1 / -1; } .half { grid-column:span 2; }
+  select { font:inherit; padding:6px 8px; border:1px solid var(--line); border-radius:6px; }
+  .timeline { display:flex; flex-wrap:wrap; align-items:stretch; row-gap:12px; padding-bottom:6px; }
+  .node { flex:0 0 auto; width:150px; border:2px solid var(--line); border-radius:10px; padding:10px; cursor:pointer; background:#fff; }
+  .node.sel { box-shadow:0 0 0 3px #c9d6ff; }
+  .node b { display:block; font-size:13px; } .node small { color:var(--muted); display:block; }
+  .node.ok, .node.pass { border-color:var(--ok); } .node.fail { border-color:var(--fail); background:#fff6f5; } .node.prd { border-color:var(--accent); }
+  .arrow { flex:0 0 28px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:18px; }
+  .arrow.back { color:var(--fail); font-weight:700; }
+  .badge { display:inline-block; font-size:11px; font-weight:700; padding:1px 7px; border-radius:9px; margin-top:4px; }
+  .badge.ok, .badge.pass { background:#e5f4ec; color:var(--ok); } .badge.fail { background:#fde8e6; color:var(--fail); }
+  pre { white-space:pre-wrap; word-break:break-word; background:#fafbfc; border:1px solid var(--line); border-radius:8px; padding:12px; max-height:420px; overflow:auto; font-size:12.5px; margin:0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; } th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-weight:600; } .y { color:var(--ok); } .n { color:var(--fail); }
+  .kpis { display:flex; gap:12px; flex-wrap:wrap; } .kpi { flex:1; min-width:120px; } .kpi b { display:block; font-size:20px; } .kpi span { color:var(--muted); font-size:12px; }
+  @media (max-width:1000px) { main { grid-template-columns:1fr; padding:16px; } .half { grid-column:auto; } }
+</style>
+</head>
+<body>
+<header><h1>Multi-Agent Content Ops</h1><label>Run <select id="run"></select></label><span class="muted" id="meta"></span></header>
+<main>
+  <section class="card wide"><div class="kpis" id="kpis"></div></section>
+  <section class="card wide"><h2>Timeline: PRD → research → draft → fact-check → polished post</h2><div class="timeline" id="timeline"></div></section>
+  <section class="card half"><h2 id="artTitle">Artifact</h2><pre id="artifact"></pre></section>
+  <section class="card half"><h2>Final post rubric</h2><table id="rubric"></table></section>
+  <section class="card"><h2>Tokens per step</h2><canvas id="tokens" height="220"></canvas></section>
+  <section class="card"><h2>Cost per step (USD)</h2><canvas id="cost" height="220"></canvas></section>
+  <section class="card"><h2>Latency per step (ms)</h2><canvas id="latency" height="220"></canvas></section>
+  <section class="card"><h2>Attempts per agent</h2><canvas id="retries" height="220"></canvas></section>
+  <section class="card wide"><h2>All runs</h2><table id="runs"></table></section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const AGENT = { research: "Researcher", write: "Writer", fact_check: "Fact-checker", polish: "Style polisher", score: "Rubric scoring" };
+const charts = {};
+const chart = (id, cfg) => { charts[id]?.destroy(); charts[id] = new Chart($(id), cfg); };
+
+async function init() {
+  const runs = await (await fetch("/api/runs")).json();
+  const want = new URLSearchParams(location.search).get("run");
+  $("run").innerHTML = runs.map((r) => `<option value="${r.id}">#${r.id} ${esc(r.prd_name)} (${r.status}, ${r.retries} retries)</option>`).join("");
+  if (want) $("run").value = want;
+  $("runs").innerHTML = "<tr><th>run</th><th>PRD</th><th>mode</th><th>status</th><th>retries</th><th>steps</th><th>tokens</th><th>cost</th><th>rubric</th></tr>" +
+    runs.map((r) => `<tr><td>#${r.id}</td><td>${esc(r.prd_name)}</td><td>${r.mode}</td><td>${r.status}</td><td>${r.retries}</td><td>${r.steps}</td>
+      <td>${r.tokens.toLocaleString()}</td><td>$${r.cost_usd.toFixed(4)}</td><td>${r.rubric_score ? (r.rubric_score * 100).toFixed(0) + "%" : "–"}</td></tr>`).join("");
+  if (runs.length) show($("run").value); else $("meta").textContent = "No runs yet: python -m contentops.run examples/prds/*.md";
+}
+
+async function show(id) {
+  const r = await (await fetch(`/api/runs/${id}`)).json();
+  const steps = r.steps;
+  $("meta").textContent = `${r.mode} mode · started ${new Date(r.started_at).toLocaleString()}`;
+  const sum = (k) => steps.reduce((s, x) => s + x[k], 0);
+  $("kpis").innerHTML = `
+    <div class="kpi"><b class="${r.status === "published" ? "y" : "n"}">${r.status}</b><span>outcome</span></div>
+    <div class="kpi"><b>${r.retries}</b><span>fact-check rollbacks</span></div>
+    <div class="kpi"><b>${(sum("input_tokens") + sum("output_tokens")).toLocaleString()}</b><span>tokens</span></div>
+    <div class="kpi"><b>$${sum("cost_usd").toFixed(4)}</b><span>cost</span></div>
+    <div class="kpi"><b>${sum("latency_ms").toFixed(0)} ms</b><span>total step latency</span></div>
+    <div class="kpi"><b>${r.rubric ? (r.rubric.score * 100).toFixed(0) + "%" : "–"}</b><span>rubric score</span></div>`;
+
+  const nodes = [{ key: "prd", label: "PRD", sub: r.prd_name, cls: "prd", text: r.prd }];
+  steps.forEach((s) => {
+    const issues = s.agent === "fact_check" && s.detail?.issues?.length ? `${s.detail.issues.length} issue(s)` : "";
+    let text = s.output;
+    if (s.agent === "fact_check") text = s.detail.issues.length ? "Issues found:\n\n" + s.detail.issues.map((i) => `- "${i.sentence}"\n  → ${i.problem}`).join("\n") : "All claims supported. ✓";
+    nodes.push({ key: s.seq, label: AGENT[s.agent] + (s.agent === "write" ? ` #${s.attempt}` : ""), sub: `${s.model ?? "deterministic"}`, cls: s.status, badge: s.status, issues, text, back: s.agent === "write" && s.attempt > 1 });
+  });
+  $("timeline").innerHTML = nodes.map((n, i) => (i ? `<div class="arrow ${n.back ? "back" : ""}" title="${n.back ? "rollback: rewrite after failed fact-check" : ""}">${n.back ? "↩" : "→"}</div>` : "") +
+    `<div class="node ${n.cls}" data-i="${i}"><b>${esc(n.label)}</b><small>${esc(n.sub)}</small>${n.badge ? `<span class="badge ${n.badge}">${n.badge}</span>` : ""}${n.issues ? `<small class="n">${n.issues}</small>` : ""}</div>`).join("");
+  const pick = (i) => {
+    document.querySelectorAll(".node").forEach((el) => el.classList.toggle("sel", +el.dataset.i === i));
+    $("artTitle").textContent = "Artifact: " + nodes[i].label; $("artifact").textContent = nodes[i].text;
+  };
+  document.querySelectorAll(".node").forEach((el) => (el.onclick = () => pick(+el.dataset.i)));
+  const firstFail = nodes.findIndex((n) => n.cls === "fail");
+  pick(firstFail > 0 ? firstFail : nodes.length - 2);
+
+  $("rubric").innerHTML = r.rubric ? "<tr><th>check</th><th>result</th></tr>" + Object.entries(r.rubric.checks).map(([k, v]) =>
+    `<tr><td>${k.replaceAll("_", " ")}</td><td class="${v ? "y" : "n"}">${v ? "pass" : "fail"}</td></tr>`).join("") +
+    `<tr><td>word count</td><td>${r.rubric.word_count}</td></tr><tr><td>Flesch reading ease</td><td>${r.rubric.reading_ease}</td></tr>` +
+    (r.rubric.llm_judge ? Object.entries(r.rubric.llm_judge).map(([k, v]) => `<tr><td>LLM judge: ${k}</td><td>${v}/5</td></tr>`).join("") : `<tr><td>LLM judge</td><td class="muted">not run in mock mode</td></tr>`) : "";
+
+  const labels = steps.map((s) => `${s.seq}. ${AGENT[s.agent]}${s.agent === "write" ? " #" + s.attempt : ""}`);
+  const color = steps.map((s) => (s.status === "fail" ? "#c0392b" : "#2f5bea"));
+  const bar = (id, data, extra = {}) => chart(id, { type: "bar", data: { labels, datasets: [{ data, backgroundColor: color, ...extra }] },
+    options: { plugins: { legend: { display: false } }, scales: { x: { ticks: { maxRotation: 60, minRotation: 45 } } } } });
+  chart("tokens", { type: "bar", data: { labels, datasets: [
+    { label: "input", data: steps.map((s) => s.input_tokens), backgroundColor: "#9fb3e8" },
+    { label: "output", data: steps.map((s) => s.output_tokens), backgroundColor: "#2f5bea" } ] },
+    options: { scales: { x: { stacked: true, ticks: { maxRotation: 60, minRotation: 45 } }, y: { stacked: true } } } });
+  bar("cost", steps.map((s) => s.cost_usd));
+  bar("latency", steps.map((s) => s.latency_ms));
+  const agents = ["research", "write", "fact_check", "polish"];
+  chart("retries", { type: "bar", data: { labels: agents.map((a) => AGENT[a]), datasets: [{ label: "attempts", backgroundColor: "#2f5bea",
+    data: agents.map((a) => steps.filter((s) => s.agent === a).length) }] }, options: { plugins: { legend: { display: false } }, scales: { y: { ticks: { stepSize: 1 } } } } });
+}
+$("run").onchange = (e) => show(e.target.value);
+init();
+</script>
+</body>
+</html>
