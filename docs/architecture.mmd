@@ -1,0 +1,14 @@
+flowchart LR
+    prd[/PRD markdown/] --> orch{{Orchestrator<br/>hand-rolled state machine}}
+    api([POST /api/runs or CLI]) --> orch
+    orch --> R[Researcher<br/>claude-sonnet-5-5<br/>PRD -> numbered facts]
+    R --> W[Writer<br/>claude-sonnet-5-5<br/>facts -> cited draft]
+    W --> F[Fact-checker<br/>claude-opus-5-5 + deterministic<br/>number verification]
+    F -->|issues found and attempts left:<br/>rollback, discard draft, send issues back| W
+    F -->|attempts exhausted| HR[needs_review<br/>human escalation]
+    F -->|pass| P[Style polisher<br/>claude-haiku-5-5]
+    P --> S[Rubric scoring<br/>7 deterministic checks<br/>+ LLM judge in live mode]
+    S --> post[/Published post/]
+    R & W & F & P & S -->|one row per step:<br/>tokens, cost, latency, attempt, output| pg[(Postgres<br/>pipeline_runs, steps)]
+    pg --> dash[Dashboard<br/>timeline + per-step metrics]
+    R & W & F & P -.->|MOCK_MODE=1| mock[Deterministic offline agents]
