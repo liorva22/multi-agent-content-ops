@@ -1,0 +1,40 @@
+x-app: &app
+  build: .
+  environment:
+    MOCK_MODE: ${MOCK_MODE:-1}
+    ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    DATABASE_URL: postgresql://contentops:contentops@db:5432/contentops
+  depends_on:
+    db:
+      condition: service_healthy
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: contentops
+      POSTGRES_PASSWORD: contentops
+      POSTGRES_DB: contentops
+    ports:
+      - "127.0.0.1:${DB_PORT:-5436}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U contentops"]
+      interval: 2s
+      retries: 30
+
+  # API (POST /api/runs) + timeline/metrics dashboard (GET /)
+  app:
+    <<: *app
+    ports:
+      - "${API_PORT:-8104}:8000"
+
+  # One-shot: run the three example PRDs through the pipeline so the dashboard has data.
+  seed:
+    <<: *app
+    command: ["sh", "-c", "python -m contentops.run examples/prds/*.md"]
+    restart: "no"
+
+volumes:
+  pgdata:
