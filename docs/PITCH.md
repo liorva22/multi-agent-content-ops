@@ -23,7 +23,7 @@ Each transition writes one row to Postgres. The dashboard renders those rows as 
 - **Postgres step log, no tracing vendor.** The full audit trail is queryable with SQL.
 
 ## What I'd do differently
-- **Live runs.** No API key was available, so every number here comes from deterministic mock agents. The mock writer is *scripted* to hallucinate, the token counts are approximations, and the LLM judge didn't run. The interesting live questions: how often a real Sonnet writer hallucinates numbers, and whether Opus catches non-numeric errors.
+- **Severity-graded fact-checks.** In the live run ($0.36), the real writer invented no numbers, but the Opus fact-checker rejected 7 of 8 drafts over framing ("first release", "No More Surprises") and sent 2 of 3 PRDs to a human. I'd have it grade severity and roll back only on unsupported facts. The mock writer's scripted number hallucinations tested a failure the real writer never showed.
 - **Longer posts in mock mode.** The template writer produces about 210 words, so the rubric's 250-word minimum fails on all three PRDs. It's left visible as a working example of the rubric catching a real defect.
 - **Claim-level verification**, not only numbers: extract every factual claim and require an entailing fact (NLI or an LLM).
 - **Human-in-the-loop** approval before publishing, plus resumable runs. That's the point to bring in LangGraph checkpoints or a durable workflow engine.

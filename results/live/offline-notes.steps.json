@@ -1,0 +1,114 @@
+[
+  {
+    "seq": 1,
+    "agent": "research",
+    "attempt": 1,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 475,
+    "output_tokens": 900,
+    "cost_usd": 0.00995,
+    "latency_ms": 4933.290299988585,
+    "output": "```json\n[\n  {\"id\": \"F1\", \"claim\": \"Offline Mode lets mobile users of the Notes app read, create and edit notes without a connection.\", \"source\": \"PRD: Summary\"},\n  {\"id\": \"F2\", \"claim\": \"Changes made offline sync automatically when users reconnect.\", \"source\": \"PRD: Summary\"},\n  {\"id\": \"F3\", \"claim\": \"The target users named in the problem statement are field technicians and travelers, who lose work when connectivity drops.\", \"source\": \"PRD: Problem\"},\n  {\"id\": \"F4\", \"claim\": \"23% of one-star app reviews in the last year mention losing a note offline.\", \"source\": \"PRD: Problem\"},\n  {\"id\": \"F5\", \"claim\": \"Notes are stored locally in an encrypted on-device database.\", \"source\": \"PRD: Solution\"},\n  {\"id\": \"F6\", \"claim\": \"Edits made offline are queued and merged on reconnect.\", \"source\": \"PRD: Solution\"},\n  {\"id\": \"F7\", \"claim\": \"When the same note was edited on two devices, both versions are kept and the user picks one; nothing is silently overwritten.\", \"source\": \"PRD: Solution\"},\n  {\"id\": \"F8\", \"claim\": \"The beta had 2,400 users over 8 weeks.\", \"source\": \"PRD: Beta results\"},\n  {\"id\": \"F9\", \"claim\": \"Sync conflicts occurred in 0.6% of synced notes during the beta.\", \"source\": \"PRD: Beta results\"},\n  {\"id\": \"F10\", \"claim\": \"There were zero data-loss reports during the beta.\", \"source\": \"PRD: Beta results\"},\n  {\"id\": \"F11\", \"claim\": \"Weekly active usage among beta users rose 12% compared with a control group.\", \"source\": \"PRD: Beta results\"},\n  {\"id\": \"F12\", \"claim\": \"Offline Mode ships in app version 5.0.\", \"source\": \"PRD: Launch\"},\n  {\"id\": \"F13\", \"claim\": \"Launch platforms are iOS and Android.\", \"source\": \"PRD: Launch\"},\n  {\"id\": \"F14\", \"claim\": \"The launch date is June 10.\", \"source\": \"PRD: Launch\"},\n  {\"id\": \"F15\", \"claim\": \"Offline Mode launches for all plans.\", \"source\": \"PRD: Launch\"},\n  {\"id\": \"F16\", \"claim\": \"Offline storage is capped at 2 GB per device.\", \"source\": \"PRD: Launch\"},\n  {\"id\": \"F17\", \"claim\": \"Real-time offline collaboration is a non-goal.\", \"source\": \"PRD: Non-goals\"},\n  {\"id\": \"F18\", \"claim\": \"Offline search across attachments is a non-goal.\", \"source\": \"PRD: Non-goals\"}\n]\n```",
+    "detail": {}
+  },
+  {
+    "seq": 2,
+    "agent": "write",
+    "attempt": 1,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 1526,
+    "output_tokens": 794,
+    "cost_usd": 0.010992,
+    "latency_ms": 5913.444200006779,
+    "output": "# Offline Mode Is Coming to Notes: Keep Working, Even Without a Connection\n\nYour notes should be there when you need them, whether or not you have a signal. Offline Mode lets mobile users of the Notes app read, create and edit notes without a connection [F1]. When you reconnect, your changes sync automatically [F2].\n\n## Why we built it\n\nLosing work to a dropped connection is frustrating. The people who feel it most are field technicians and travelers, who lose work when connectivity drops [F3]. Our users have told us the same thing in their reviews: 23% of one-star app reviews in the last year mention losing a note offline [F4].\n\nWe took that feedback seriously, and Offline Mode is our answer.\n\n## How it works\n\nOffline Mode keeps your notes close to you. Notes are stored locally in an encrypted on-device database [F5]. When you make edits without a connection, those edits are queued and merged on reconnect [F6].\n\nWe also thought carefully about what happens when the same note is edited in two places. If the same note was edited on two devices, both versions are kept and you pick one [F7]. Nothing is silently overwritten [F7].\n\n## What we saw in the beta\n\nBefore launch, we tested Offline Mode with 2,400 beta users over 8 weeks [F8]. Here is what we found:\n\n- Sync conflicts occurred in 0.6% of synced notes [F9].\n- There were zero data-loss reports during the beta [F10].\n- Weekly active usage among beta users rose 12% compared with a control group [F11].\n\nConflicts are rare, and when they do happen, the choice stays with you [F7][F9].\n\n## Availability\n\nOffline Mode ships in app version 5.0 [F12] on iOS and Android [F13]. It launches on June 10 [F14] and is available for all plans [F15].\n\nOffline storage is capped at 2 GB per device [F16].\n\n## What Offline Mode doesn't do (yet)\n\nWe want to be clear about the scope of this release. Real-time offline collaboration is a non-goal [F17], and so is offline search across attachments [F18]. This first release focuses on the essentials: reading, creating and editing your notes without a connection [F1].\n\n## Get ready for June 10\n\nUpdate to version 5.0 when it arrives [F12], and your notes will be ready to go wherever you are. Whether you're on a job site or on the road, you can keep working, and your changes will sync when you're back online [F2].",
+    "detail": {}
+  },
+  {
+    "seq": 3,
+    "agent": "fact_check",
+    "attempt": 1,
+    "status": "fail",
+    "model": "claude-opus-5-5",
+    "input_tokens": 2155,
+    "output_tokens": 1120,
+    "cost_usd": 0.03102,
+    "latency_ms": 10288.910399976885,
+    "output": "```json\n{\n  \"issues\": [\n    {\n      \"sentence\": \"The people who feel it most are field technicians and travelers, who lose work when connectivity drops [F3].\",\n      \"problem\": \"Exaggerated. The PRD names field technicians and travelers as users who lose work when connectivity drops. It does not say they are affected more than anyone else.\"\n    },\n    {\n      \"sentence\": \"## What Offline Mode doesn't do (yet)\",\n      \"problem\": \"Unsupported. '(yet)' implies these features are planned. The PRD lists them only as non-goals and mentions no roadmap or future release.\"\n    },\n    {\n      \"sentence\": \"This first release focuses on the essentials: reading, creating and editing your notes without a connection [F1].\",\n      \"problem\": \"Partly unsupported. 'First release' implies follow-up releases that will expand the scope, which the PRD does not mention. The capabilities listed match F1.\"\n    }\n  ]\n}\n```",
+    "detail": {
+      "issues": [
+        {
+          "sentence": "The people who feel it most are field technicians and travelers, who lose work when connectivity drops [F3].",
+          "problem": "Exaggerated. The PRD names field technicians and travelers as users who lose work when connectivity drops. It does not say they are affected more than anyone else."
+        },
+        {
+          "sentence": "## What Offline Mode doesn't do (yet)",
+          "problem": "Unsupported. '(yet)' implies these features are planned. The PRD lists them only as non-goals and mentions no roadmap or future release."
+        },
+        {
+          "sentence": "This first release focuses on the essentials: reading, creating and editing your notes without a connection [F1].",
+          "problem": "Partly unsupported. 'First release' implies follow-up releases that will expand the scope, which the PRD does not mention. The capabilities listed match F1."
+        }
+      ],
+      "llm_issues": 3,
+      "numeric_issues": 0
+    }
+  },
+  {
+    "seq": 4,
+    "agent": "write",
+    "attempt": 2,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 1843,
+    "output_tokens": 689,
+    "cost_usd": 0.010576,
+    "latency_ms": 4965.51510001882,
+    "output": "# Offline Mode Is Coming to Notes: Your Notes, With or Without a Connection\n\nOffline Mode lets mobile users of the Notes app read, create and edit notes without a connection [F1]. Changes made offline sync automatically when users reconnect [F2]. It ships in app version 5.0 on June 10 [F12][F14].\n\n## Why we built it\n\nField technicians and travelers are among the users who lose work when connectivity drops [F3]. The signal in our app reviews was hard to ignore: 23% of one-star app reviews in the last year mention losing a note offline [F4]. Offline Mode is our answer to that problem.\n\n## How it works\n\nNotes are stored locally in an encrypted on-device database [F5]. Edits made offline are queued and merged on reconnect [F6].\n\nSometimes the same note gets edited on two devices. In that case, both versions are kept and you pick one [F7]. Nothing is silently overwritten [F7].\n\n## What we saw in the beta\n\nThe beta had 2,400 users over 8 weeks [F8]. During that time, sync conflicts occurred in 0.6% of synced notes [F9]. There were zero data-loss reports during the beta [F10]. Weekly active usage among beta users rose 12% compared with a control group [F11].\n\n## Availability\n\nOffline Mode ships in app version 5.0 [F12]. It launches on iOS and Android [F13] on June 10 [F14], and it is available for all plans [F15].\n\nOffline storage is capped at 2 GB per device [F16].\n\n## What Offline Mode doesn't do\n\nTo set expectations clearly, two things are outside the scope of Offline Mode. Real-time offline collaboration is a non-goal [F17]. Offline search across attachments is also a non-goal [F18].\n\n## Get ready for June 10\n\nIf you have ever lost a note because your connection dropped, Offline Mode is built for that situation. You can read, create and edit notes without a connection [F1], and your changes sync automatically when you reconnect [F2]. Update to version 5.0 when it arrives on June 10 [F12][F14].",
+    "detail": {}
+  },
+  {
+    "seq": 5,
+    "agent": "fact_check",
+    "attempt": 1,
+    "status": "pass",
+    "model": "claude-opus-5-5",
+    "input_tokens": 2050,
+    "output_tokens": 367,
+    "cost_usd": 0.01554,
+    "latency_ms": 3833.2377999904566,
+    "output": "```json\n{\"issues\": []}\n```",
+    "detail": {
+      "issues": [],
+      "llm_issues": 0,
+      "numeric_issues": 0
+    }
+  },
+  {
+    "seq": 6,
+    "agent": "polish",
+    "attempt": 1,
+    "status": "ok",
+    "model": "claude-haiku-5-5",
+    "input_tokens": 817,
+    "output_tokens": 559,
+    "cost_usd": 0.0003612,
+    "latency_ms": 2263.0196000100113,
+    "output": "# Offline Mode Is Coming to Notes: Your Notes, With or Without a Connection\n\n**TL;DR:** Offline Mode lets mobile users read, create, and edit notes without a connection, and launches in app version 5.0 on June 10.\n\n## Why we built it\n\nField technicians and travelers often lose work when connectivity drops. Our app reviews made the problem clear: 23% of one-star reviews in the last year mention losing a note offline. We built Offline Mode to solve it.\n\n## How it works\n\nNotes are stored locally in an encrypted on-device database. Edits made offline are queued and merged when the device reconnects.\n\nSometimes the same note is edited on two devices. In that case, we keep both versions and you choose one. Nothing is silently overwritten.\n\n## What we saw in the beta\n\nThe beta ran for 8 weeks and included 2,400 users. Sync conflicts occurred in 0.6% of synced notes. The beta produced zero data-loss reports. Weekly active usage among beta users rose 12% compared with a control group.\n\n## Availability\n\nOffline Mode ships in app version 5.0. It launches on June 10 on iOS and Android, and it is available for all plans.\n\nOffline storage is capped at 2 GB per device.\n\n## What Offline Mode doesn't do\n\nTwo things are outside the scope of Offline Mode. It does not support real-time offline collaboration. It also does not support offline search across attachments.\n\n## Get ready for June 10\n\nIf you have ever lost a note because your connection dropped, Offline Mode is built for that situation. You can read, create, and edit notes without a connection. Your changes sync automatically when you reconnect. Update to version 5.0 when it arrives on June 10.",
+    "detail": {}
+  },
+  {
+    "seq": 7,
+    "agent": "score",
+    "attempt": 1,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 1009,
+    "output_tokens": 33,
+    "cost_usd": 0.002348,
+    "latency_ms": 1100.9031000139657,
+    "output": "{\"checks\": {\"has_title\": true, \"has_tldr\": true, \"enough_sections\": true, \"length_in_range\": true, \"no_citation_markers\": true, \"numbers_supported\": true, \"readable\": true}, \"score\": 1.0, \"word_count\": 253, \"reading_ease\": 65.9, \"llm_judge\": {\"clarity\": 5, \"accuracy_to_prd\": 5, \"engagement\": 3}}",
+    "detail": {}
+  }
+]

@@ -58,6 +58,7 @@ def main(argv=None):
         r = run["result"]
         if r.get("final"):
             (args.out / f"{path.stem}.md").write_text(r["final"], encoding="utf-8")
+        (args.out / f"{path.stem}.steps.json").write_text(json.dumps(run["steps"], indent=2, default=str), encoding="utf-8")
         row = {
             "prd": path.stem,
             "status": r["status"],

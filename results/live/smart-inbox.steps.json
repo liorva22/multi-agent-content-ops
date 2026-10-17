@@ -1,0 +1,128 @@
+[
+  {
+    "seq": 1,
+    "agent": "research",
+    "attempt": 1,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 515,
+    "output_tokens": 901,
+    "cost_usd": 0.01004,
+    "latency_ms": 4713.280199997826,
+    "output": "```json\n[\n  {\"id\": \"F1\", \"claim\": \"Smart Inbox Triage automatically sorts incoming support tickets into four queues: billing, bug, how-to, and account.\", \"source\": \"PRD: Summary\"},\n  {\"id\": \"F2\", \"claim\": \"The purpose of the product is so that agents stop hand-sorting their morning backlog.\", \"source\": \"PRD: Summary\"},\n  {\"id\": \"F3\", \"claim\": \"Support agents at mid-size SaaS companies spend the first 45 minutes of every shift sorting tickets.\", \"source\": \"PRD: Problem\"},\n  {\"id\": \"F4\", \"claim\": \"In customer interviews, 9 of 12 support leads named manual triage as their top time sink.\", \"source\": \"PRD: Problem\"},\n  {\"id\": \"F5\", \"claim\": \"A classifier reads each new ticket's subject and body and assigns a queue and a priority (P1-P3).\", \"source\": \"PRD: Solution\"},\n  {\"id\": \"F6\", \"claim\": \"Agents can override any label with one click.\", \"source\": \"PRD: Solution\"},\n  {\"id\": \"F7\", \"claim\": \"Every override is used to retrain the model weekly.\", \"source\": \"PRD: Solution\"},\n  {\"id\": \"F8\", \"claim\": \"The beta ran for 6 weeks with 14 customer teams.\", \"source\": \"PRD: Beta results\"},\n  {\"id\": \"F9\", \"claim\": \"Triage accuracy in the beta was 91% against agent-corrected labels.\", \"source\": \"PRD: Beta results\"},\n  {\"id\": \"F10\", \"claim\": \"Median time to first response dropped from 4.2 hours to 2.9 hours during the beta.\", \"source\": \"PRD: Beta results\"},\n  {\"id\": \"F11\", \"claim\": \"Agents overrode 7% of labels in the beta.\", \"source\": \"PRD: Beta results\"},\n  {\"id\": \"F12\", \"claim\": \"Most overrides in the beta were billing vs account.\", \"source\": \"PRD: Beta results\"},\n  {\"id\": \"F13\", \"claim\": \"General availability is on March 3.\", \"source\": \"PRD: Launch\"},\n  {\"id\": \"F14\", \"claim\": \"The feature is included in the Growth and Enterprise plans at no extra cost.\", \"source\": \"PRD: Launch\"},\n  {\"id\": \"F15\", \"claim\": \"The feature is available in English first; Spanish and German follow in Q3.\", \"source\": \"PRD: Launch\"},\n  {\"id\": \"F16\", \"claim\": \"Auto-replying to customers is a non-goal.\", \"source\": \"PRD: Non-goals\"},\n  {\"id\": \"F17\", \"claim\": \"Routing to individual agents is a non-goal.\", \"source\": \"PRD: Non-goals\"}\n]\n```",
+    "detail": {}
+  },
+  {
+    "seq": 2,
+    "agent": "write",
+    "attempt": 1,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 1559,
+    "output_tokens": 974,
+    "cost_usd": 0.012858,
+    "latency_ms": 7149.936400004663,
+    "output": "# Smart Inbox Triage: Stop Sorting, Start Solving\n\nEvery support team knows the feeling of opening the queue at the start of a shift and facing a pile of unsorted tickets. Today we're announcing Smart Inbox Triage, a feature that automatically sorts incoming support tickets into four queues: billing, bug, how-to, and account [F1]. The goal is simple: agents stop hand-sorting their morning backlog [F2].\n\n## The problem: triage eats the morning\n\nSupport agents at mid-size SaaS companies spend the first 45 minutes of every shift sorting tickets [F3]. That is time spent organizing work rather than resolving it. We heard the same thing from the people who manage these teams: in customer interviews, 9 of 12 support leads named manual triage as their top time sink [F4].\n\n## How Smart Inbox Triage works\n\nA classifier reads each new ticket's subject and body and assigns a queue and a priority (P1-P3) [F5]. Tickets land where they belong, already ranked, so agents can start with the work that matters.\n\nNo classifier is perfect, so we built in a way for agents to stay in control. Agents can override any label with one click [F6]. Those corrections aren't wasted, either, because every override is used to retrain the model weekly [F7]. The more your team uses it, the more it learns from your agents' judgment.\n\n## What we saw in the beta\n\nBefore launch, we put Smart Inbox Triage in the hands of real teams. The beta ran for 6 weeks with 14 customer teams [F8]. Here is what we measured:\n\n- **Accuracy:** Triage accuracy was 91% against agent-corrected labels [F9].\n- **Faster responses:** Median time to first response dropped from 4.2 hours to 2.9 hours [F10].\n- **Overrides:** Agents overrode 7% of labels [F11]. Most of those overrides were billing vs account [F12].\n\nThat last point is useful to know. Billing and account tickets are the pair most likely to be confused, and the one-click override gives agents a quick fix when that happens.\n\n## What it doesn't do\n\nWe want to be clear about the scope of this release. Auto-replying to customers is a non-goal [F16]. Routing to individual agents is also a non-goal [F17]. Smart Inbox Triage focuses on one job: getting tickets into the right queue with the right priority.\n\n## Availability and pricing\n\nGeneral availability is on March 3 [F13]. Smart Inbox Triage is included in the Growth and Enterprise plans at no extra cost [F14]. It is available in English first, with Spanish and German following in Q3 [F15].\n\n## Get your mornings back\n\nManual sorting has long been a fixture of the start of the support shift, and it doesn't have to be. With automatic queues, priority levels, one-click overrides and a model that learns from your team's corrections, Smart Inbox Triage is built to move agents from sorting to solving. Look for it on March 3 [F13].",
+    "detail": {}
+  },
+  {
+    "seq": 3,
+    "agent": "fact_check",
+    "attempt": 1,
+    "status": "fail",
+    "model": "claude-opus-5-5",
+    "input_tokens": 2377,
+    "output_tokens": 974,
+    "cost_usd": 0.028988,
+    "latency_ms": 10099.831599975005,
+    "output": "```json\n{\"issues\": [{\"sentence\": \"Tickets land where they belong, already ranked, so agents can start with the work that matters.\", \"problem\": \"Overstated. 'Land where they belong' implies every ticket is classified correctly, but the PRD reports 91% accuracy against agent-corrected labels [F9] and a 7% override rate [F11], so some tickets are misrouted. The PRD also says only that tickets get a priority label (P1-P3) [F5]. It does not say tickets are ranked or reordered within a queue.\"}]}\n```",
+    "detail": {
+      "issues": [
+        {
+          "sentence": "Tickets land where they belong, already ranked, so agents can start with the work that matters.",
+          "problem": "Overstated. 'Land where they belong' implies every ticket is classified correctly, but the PRD reports 91% accuracy against agent-corrected labels [F9] and a 7% override rate [F11], so some tickets are misrouted. The PRD also says only that tickets get a priority label (P1-P3) [F5]. It does not say tickets are ranked or reordered within a queue."
+        }
+      ],
+      "llm_issues": 1,
+      "numeric_issues": 0
+    }
+  },
+  {
+    "seq": 4,
+    "agent": "write",
+    "attempt": 2,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 1759,
+    "output_tokens": 960,
+    "cost_usd": 0.013118,
+    "latency_ms": 7148.966599983396,
+    "output": "# Smart Inbox Triage: Stop Hand-Sorting Your Morning Backlog\n\nStarting March 3, support teams can hand the first chore of the day to a classifier. Smart Inbox Triage automatically sorts incoming support tickets into four queues: billing, bug, how-to, and account [F1]. The goal is simple: agents stop hand-sorting their morning backlog [F2].\n\n## The problem: a slow start to every shift\n\nSupport agents at mid-size SaaS companies spend the first 45 minutes of every shift sorting tickets [F3]. That is time spent before any customer gets an answer. The pain is widely felt. In customer interviews, 9 of 12 support leads named manual triage as their top time sink [F4].\n\n## How Smart Inbox Triage works\n\nA classifier reads each new ticket's subject and body and assigns a queue and a priority (P1-P3) [F5]. Agents see tickets sorted into billing, bug, how-to, and account queues [F1], each carrying a priority label [F5], so they can begin working without sorting first [F2].\n\nBecause no classifier is perfect, agents stay in control. They can override any label with one click [F6]. Those corrections are not wasted: every override is used to retrain the model weekly [F7].\n\n## What we saw in the beta\n\nThe beta ran for 6 weeks with 14 customer teams [F8]. Here is what the results showed:\n\n- **Accuracy:** Triage accuracy was 91% against agent-corrected labels [F9].\n- **Faster responses:** Median time to first response dropped from 4.2 hours to 2.9 hours during the beta [F10].\n- **Overrides:** Agents overrode 7% of labels [F11], and most of those overrides were billing vs account [F12].\n\nThat last point is useful to know. The override data shows where the line between billing and account tickets is hardest to draw, and since every override feeds the weekly retraining [F7], those corrections are what the model learns from.\n\n## What it does not do\n\nWe want to be clear about scope. Auto-replying to customers is a non-goal [F16]. So is routing to individual agents [F17]. Smart Inbox Triage focuses on sorting tickets into queues and labeling priority [F1][F5], and leaves the rest of your workflow as it is.\n\n## Availability and pricing\n\nGeneral availability is on March 3 [F13]. The feature is included in the Growth and Enterprise plans at no extra cost [F14]. It is available in English first, with Spanish and German following in Q3 [F15].\n\n## Get your mornings back\n\nManual triage has been a top time sink for support leads [F4], and it takes up the first 45 minutes of a shift [F3]. With Smart Inbox Triage, teams on the Growth and Enterprise plans can hand that sorting to a classifier [F1][F14]. Agents keep the final say with one-click overrides [F6], and the model keeps improving through weekly retraining [F7].",
+    "detail": {}
+  },
+  {
+    "seq": 5,
+    "agent": "fact_check",
+    "attempt": 1,
+    "status": "fail",
+    "model": "claude-opus-5-5",
+    "input_tokens": 2363,
+    "output_tokens": 1288,
+    "cost_usd": 0.035212,
+    "latency_ms": 11677.162500011036,
+    "output": "```json\n{\n  \"issues\": [\n    {\n      \"sentence\": \"That is time spent before any customer gets an answer.\",\n      \"problem\": \"Unsupported. The PRD says agents spend the first 45 minutes of every shift sorting tickets (F3). It does not say that no customer gets a response during that time.\"\n    },\n    {\n      \"sentence\": \"Manual triage has been a top time sink for support leads [F4], and it takes up the first 45 minutes of a shift [F3].\",\n      \"problem\": \"Overgeneralized. F4 says 9 of 12 interviewed support leads named manual triage as their top time sink, not support leads in general. F3 is also specific to agents at mid-size SaaS companies.\"\n    },\n    {\n      \"sentence\": \"Agents keep the final say with one-click overrides [F6], and the model keeps improving through weekly retraining [F7].\",\n      \"problem\": \"Exaggerated. F7 says only that every override is used to retrain the model weekly. Neither the PRD nor the facts claim that retraining improves the model or that it keeps improving.\"\n    }\n  ]\n}\n```",
+    "detail": {
+      "issues": [
+        {
+          "sentence": "That is time spent before any customer gets an answer.",
+          "problem": "Unsupported. The PRD says agents spend the first 45 minutes of every shift sorting tickets (F3). It does not say that no customer gets a response during that time."
+        },
+        {
+          "sentence": "Manual triage has been a top time sink for support leads [F4], and it takes up the first 45 minutes of a shift [F3].",
+          "problem": "Overgeneralized. F4 says 9 of 12 interviewed support leads named manual triage as their top time sink, not support leads in general. F3 is also specific to agents at mid-size SaaS companies."
+        },
+        {
+          "sentence": "Agents keep the final say with one-click overrides [F6], and the model keeps improving through weekly retraining [F7].",
+          "problem": "Exaggerated. F7 says only that every override is used to retrain the model weekly. Neither the PRD nor the facts claim that retraining improves the model or that it keeps improving."
+        }
+      ],
+      "llm_issues": 3,
+      "numeric_issues": 0
+    }
+  },
+  {
+    "seq": 6,
+    "agent": "write",
+    "attempt": 3,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 1923,
+    "output_tokens": 818,
+    "cost_usd": 0.012026,
+    "latency_ms": 5797.8257999930065,
+    "output": "# Smart Inbox Triage: Stop Hand-Sorting Your Morning Backlog\n\nStarting March 3, support teams can let Smart Inbox Triage handle the first pass on incoming tickets. It automatically sorts incoming support tickets into four queues: billing, bug, how-to, and account [F1]. The goal is simple: agents stop hand-sorting their morning backlog [F2].\n\n## The problem: a slow start to every shift\n\nSupport agents at mid-size SaaS companies spend the first 45 minutes of every shift sorting tickets [F3]. When we talked with customers, 9 of 12 support leads we interviewed named manual triage as their top time sink [F4]. Smart Inbox Triage was built to take that sorting work off agents' plates.\n\n## How it works\n\nA classifier reads each new ticket's subject and body and assigns a queue and a priority (P1-P3) [F5]. Agents can override any label with one click [F6]. Every override is used to retrain the model weekly [F7].\n\nSmart Inbox Triage is deliberately focused. Auto-replying to customers is a non-goal [F16], and so is routing to individual agents [F17]. The feature sorts tickets into queues and assigns priorities, and your team stays in charge from there.\n\n## What we saw in the beta\n\nThe beta ran for 6 weeks with 14 customer teams [F8]. Here is what the results showed:\n\n- Triage accuracy was 91% against agent-corrected labels [F9].\n- Median time to first response dropped from 4.2 hours to 2.9 hours [F10].\n- Agents overrode 7% of labels [F11].\n\nMost of the overrides in the beta were billing vs account [F12]. That tells us where the line between those two queues is hardest to draw, and the one-click override gives agents a quick way to correct a label when it is wrong [F6].\n\n## Availability and pricing\n\nGeneral availability is on March 3 [F13]. Smart Inbox Triage is included in the Growth and Enterprise plans at no extra cost [F14].\n\nIt is available in English first, with Spanish and German following in Q3 [F15].\n\n## Get started\n\nIf your agents begin the day sorting tickets by hand, Smart Inbox Triage is built for that routine. It sorts incoming tickets into billing, bug, how-to, and account queues [F1], so agents can skip the manual sorting of their morning backlog [F2]. Look for it on March 3 if you are on a Growth or Enterprise plan [F13][F14].",
+    "detail": {}
+  },
+  {
+    "seq": 7,
+    "agent": "fact_check",
+    "attempt": 1,
+    "status": "fail",
+    "model": "claude-opus-5-5",
+    "input_tokens": 2221,
+    "output_tokens": 819,
+    "cost_usd": 0.025264,
+    "latency_ms": 7623.743399977684,
+    "output": "```json\n{\n  \"issues\": [\n    {\n      \"sentence\": \"That tells us where the line between those two queues is hardest to draw, and the one-click override gives agents a quick way to correct a label when it is wrong [F6].\",\n      \"problem\": \"The PRD says only that most beta overrides were billing vs account (F12). The conclusion that this is where the line between queues is 'hardest to draw' is the draft's own inference. It is plausible, but the PRD doesn't state it. The one-click override part is supported by F6.\"\n    }\n  ]\n}\n```",
+    "detail": {
+      "issues": [
+        {
+          "sentence": "That tells us where the line between those two queues is hardest to draw, and the one-click override gives agents a quick way to correct a label when it is wrong [F6].",
+          "problem": "The PRD says only that most beta overrides were billing vs account (F12). The conclusion that this is where the line between queues is 'hardest to draw' is the draft's own inference. It is plausible, but the PRD doesn't state it. The one-click override part is supported by F6."
+        }
+      ],
+      "llm_issues": 1,
+      "numeric_issues": 0
+    }
+  }
+]

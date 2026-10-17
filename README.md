@@ -60,7 +60,22 @@ From `MOCK_MODE=1 python -m contentops.run examples/prds/*.md` (outputs in [`res
 - **Retries are where the money goes.** In usage-billing, two rollbacks made the Writer + Fact-checker 83% of the run's cost ($0.0239 of $0.0289), against 57% in the zero-retry run.
 - **The rubric failed one check on every post:** `length_in_range`. The template writer produces 205–217 words against a 250-word minimum. That's a genuine defect the rubric caught, left visible on purpose.
 
-\* Mock token counts are character-length approximations (chars/4), priced at the configured models' list prices. They show the cost *structure*, not a real bill. No live run was made: no API key was available, so the LLM judge and the real hallucination rates are unmeasured.
+\* Mock token counts are character-length approximations (chars/4), priced at the configured models' list prices. They show the cost *structure*, not a real bill.
+
+### Live run (real Claude agents)
+
+`MOCK_MODE=0 python -m contentops.run examples/prds/*.md --out results/live` → [`results/live/`](results/live/), including every fact-check verdict in `*.steps.json`. Real API spend: **$0.36** for the three PRDs (an earlier live run without saved step logs cost $0.28 and is not reported).
+
+| PRD | Outcome | Fact-check rollbacks | Tokens | Cost | Rubric | LLM judge (clarity / accuracy / engagement) |
+|---|---|---|---|---|---|---|
+| offline-notes | published | 1 | 14,337 | $0.0808 | 7/7 (253 words) | 5 / 5 / 3 |
+| smart-inbox | needs_review | 2 | 19,451 | $0.1375 | — | — |
+| usage-billing | needs_review | 2 | 20,151 | $0.1449 | — | — |
+
+- **The real writer invented no numbers.** The deterministic numeric check found 0 issues in 8 fact-checks. So the scripted mock hallucinations tested a failure this writer never showed.
+- **The Opus fact-checker rejected 7 of 8 drafts for framing, not facts.** It flagged 13 claim-level issues, such as "(yet)" and "first release" implying a roadmap the PRD doesn't mention, "No More Surprises" promising what the beta only met for 52 of 60 accounts, and "gives customers flexibility" with no source. Most are fair catches, but at this strictness, **2 of 3 PRDs escalated to a human**.
+- **Fact-checking is the cost center:** 64% of live spend, and 91% together with rewrites.
+- **Next lever:** have the fact-checker grade issue severity, and roll back only on unsupported facts, not on tone.
 
 ## Tech stack
 

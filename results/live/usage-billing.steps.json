@@ -1,0 +1,128 @@
+[
+  {
+    "seq": 1,
+    "agent": "research",
+    "attempt": 1,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 485,
+    "output_tokens": 909,
+    "cost_usd": 0.01006,
+    "latency_ms": 4885.884799994528,
+    "output": "[\n{\"id\":\"F1\",\"claim\":\"The product is called the Usage Dashboard (Usage-Based Billing Dashboard).\",\"source\":\"PRD: Title/Summary\"},\n{\"id\":\"F2\",\"claim\":\"The Usage Dashboard shows customers, in near real time, what they are consuming and what their next invoice will be.\",\"source\":\"PRD: Summary\"},\n{\"id\":\"F3\",\"claim\":\"The dashboard's stated purpose is so finance teams are never surprised by a bill.\",\"source\":\"PRD: Summary\"},\n{\"id\":\"F4\",\"claim\":\"Since the move to usage-based pricing, billing-related support tickets have tripled.\",\"source\":\"PRD: Problem\"},\n{\"id\":\"F5\",\"claim\":\"Invoice disputes now take an average of 11 days to resolve.\",\"source\":\"PRD: Problem\"},\n{\"id\":\"F6\",\"claim\":\"The dashboard is located inside the admin console.\",\"source\":\"PRD: Solution\"},\n{\"id\":\"F7\",\"claim\":\"The dashboard shows daily usage per product.\",\"source\":\"PRD: Solution\"},\n{\"id\":\"F8\",\"claim\":\"The dashboard shows a month-to-date cost.\",\"source\":\"PRD: Solution\"},\n{\"id\":\"F9\",\"claim\":\"The dashboard shows a forecast of the month-end invoice.\",\"source\":\"PRD: Solution\"},\n{\"id\":\"F10\",\"claim\":\"Admins can set budget alerts at any amount.\",\"source\":\"PRD: Solution\"},\n{\"id\":\"F11\",\"claim\":\"Admins receive an email when 80% and 100% of the budget is reached.\",\"source\":\"PRD: Solution\"},\n{\"id\":\"F12\",\"claim\":\"60 enterprise accounts used the dashboard in the beta for one billing cycle.\",\"source\":\"PRD: Beta results\"},\n{\"id\":\"F13\",\"claim\":\"The month-end forecast was within 5% of the final invoice for 52 of the 60 beta accounts.\",\"source\":\"PRD: Beta results\"},\n{\"id\":\"F14\",\"claim\":\"Billing-related tickets from beta accounts fell by 38%.\",\"source\":\"PRD: Beta results\"},\n{\"id\":\"F15\",\"claim\":\"The dashboard is generally available on September 15.\",\"source\":\"PRD: Launch\"},\n{\"id\":\"F16\",\"claim\":\"General availability is for all Enterprise customers.\",\"source\":\"PRD: Launch\"},\n{\"id\":\"F17\",\"claim\":\"Usage data refreshes every 15 minutes.\",\"source\":\"PRD: Launch\"},\n{\"id\":\"F18\",\"claim\":\"Non-goal: changing prices or plans from the dashboard.\",\"source\":\"PRD: Non-goals\"},\n{\"id\":\"F19\",\"claim\":\"Non-goal: multi-currency invoices.\",\"source\":\"PRD: Non-goals\"}\n]",
+    "detail": {}
+  },
+  {
+    "seq": 2,
+    "agent": "write",
+    "attempt": 1,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 1615,
+    "output_tokens": 924,
+    "cost_usd": 0.01247,
+    "latency_ms": 7376.39869999839,
+    "output": "# Meet the Usage Dashboard: No More Surprises on Your Invoice\n\nToday we're announcing the Usage Dashboard, also known as the Usage-Based Billing Dashboard [F1]. It shows customers, in near real time, what they are consuming and what their next invoice will be [F2]. The goal is simple: finance teams should never be surprised by a bill [F3].\n\n## Why we built it\n\nUsage-based pricing gives customers flexibility, but it also made billing harder to predict. Since the move to usage-based pricing, billing-related support tickets have tripled [F4]. Invoice disputes now take an average of 11 days to resolve [F5]. That is too long for finance teams waiting on answers, and too many tickets for everyone involved.\n\nWe wanted to fix the cause, not just the symptoms. If customers can see what they are consuming while they consume it, there is far less room for an unexpected number to show up at the end of the month.\n\n## What you get\n\nThe dashboard lives inside the admin console, so you will find it where you already manage your account [F6]. It brings together three views:\n\n- **Daily usage per product.** See what you are consuming, product by product, day by day [F7].\n- **Month-to-date cost.** Know what you have spent so far this month [F8].\n- **Month-end forecast.** See a forecast of your month-end invoice before it arrives [F9].\n\nUsage data refreshes every 15 minutes, so what you see stays current [F17].\n\n## Budget alerts that keep you ahead\n\nSeeing the numbers is helpful, but you should not have to keep checking. Admins can set budget alerts at any amount [F10]. When usage reaches 80% and again at 100% of the budget, admins receive an email [F11]. That gives your team an early warning and a clear signal when the line is crossed.\n\n## What we saw in the beta\n\nBefore launch, 60 enterprise accounts used the dashboard for one billing cycle [F12]. For 52 of those 60 accounts, the month-end forecast was within 5% of the final invoice [F13]. Billing-related tickets from beta accounts fell by 38% [F14].\n\nThose results point to what we hoped for: forecasts finance teams can plan around, and fewer billing questions landing in the support queue.\n\n## What the dashboard doesn't do\n\nWe want to be clear about scope. The dashboard is for visibility, so changing prices or plans from the dashboard is a non-goal [F18]. Multi-currency invoices are also a non-goal [F19].\n\n## Availability\n\nThe Usage Dashboard is generally available on September 15 [F15]. It is available to all Enterprise customers [F16]. If you are an admin on an Enterprise account, open the admin console to see your usage, check your forecast, and set your first budget alert.\n\nBilling should be something you can see coming. With the Usage Dashboard, it is.",
+    "detail": {}
+  },
+  {
+    "seq": 3,
+    "agent": "fact_check",
+    "attempt": 1,
+    "status": "fail",
+    "model": "claude-opus-5-5",
+    "input_tokens": 2365,
+    "output_tokens": 1346,
+    "cost_usd": 0.03638,
+    "latency_ms": 13019.341900013387,
+    "output": "```json\n{\n  \"issues\": [\n    {\n      \"sentence\": \"Usage-based pricing gives customers flexibility, but it also made billing harder to predict.\",\n      \"problem\": \"No fact or PRD section says usage-based pricing gives customers flexibility. The PRD only says billing tickets tripled and disputes take 11 days. That implies billing became harder to predict, but the flexibility benefit is not supported.\"\n    },\n    {\n      \"sentence\": \"Meet the Usage Dashboard: No More Surprises on Your Invoice\",\n      \"problem\": \"The headline states as a guaranteed outcome what the PRD presents only as a goal (F3: 'so finance teams are never surprised'). The beta results contradict an absolute promise: the forecast was within 5% for only 52 of 60 accounts (F13), so 8 accounts saw larger deviations.\"\n    }\n  ]\n}\n```",
+    "detail": {
+      "issues": [
+        {
+          "sentence": "Usage-based pricing gives customers flexibility, but it also made billing harder to predict.",
+          "problem": "No fact or PRD section says usage-based pricing gives customers flexibility. The PRD only says billing tickets tripled and disputes take 11 days. That implies billing became harder to predict, but the flexibility benefit is not supported."
+        },
+        {
+          "sentence": "Meet the Usage Dashboard: No More Surprises on Your Invoice",
+          "problem": "The headline states as a guaranteed outcome what the PRD presents only as a goal (F3: 'so finance teams are never surprised'). The beta results contradict an absolute promise: the forecast was within 5% for only 52 of 60 accounts (F13), so 8 accounts saw larger deviations."
+        }
+      ],
+      "llm_issues": 2,
+      "numeric_issues": 0
+    }
+  },
+  {
+    "seq": 4,
+    "agent": "write",
+    "attempt": 2,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 1913,
+    "output_tokens": 891,
+    "cost_usd": 0.012736,
+    "latency_ms": 7483.74860000331,
+    "output": "# Meet the Usage Dashboard: Built So Finance Teams Are Never Surprised by a Bill\n\nBilling questions have become a bigger part of life since the move to usage-based pricing. Billing-related support tickets have tripled [F4], and invoice disputes now take an average of 11 days to resolve [F5]. Today we're announcing the Usage Dashboard, which shows customers, in near real time, what they are consuming and what their next invoice will be [F2]. Its purpose is simple: so finance teams are never surprised by a bill [F3].\n\n## What the Usage Dashboard shows\n\nThe Usage Dashboard lives inside the admin console [F1][F6]. It brings together three views of your consumption:\n\n- **Daily usage per product.** See what you are consuming, product by product, day by day [F7].\n- **Month-to-date cost.** Know what you have spent so far this month [F8].\n- **Month-end forecast.** See a forecast of your month-end invoice [F9].\n\nUsage data refreshes every 15 minutes [F17], so the numbers you see stay current throughout the billing cycle.\n\n## Budget alerts that work the way you do\n\nSeeing your usage is useful. Being told when it matters is better. Admins can set budget alerts at any amount [F10]. When usage reaches 80% and again at 100% of the budget, admins receive an email [F11]. That means you don't need to keep the dashboard open to stay informed about where you stand.\n\n## What we saw in the beta\n\nBefore launch, 60 enterprise accounts used the dashboard for one billing cycle [F12]. The results:\n\n- The month-end forecast was within 5% of the final invoice for 52 of the 60 accounts [F13].\n- Billing-related tickets from beta accounts fell by 38% [F14].\n\nThese results come from a single billing cycle, but they show the dashboard giving finance teams a reliable view of their upcoming invoice and reducing the volume of billing-related tickets [F13][F14].\n\n## What the dashboard is not\n\nWe want to be clear about scope. The dashboard is for visibility, not for making changes. Changing prices or plans from the dashboard is not a goal of this release [F18], and multi-currency invoices are also out of scope [F19].\n\n## Availability\n\nThe Usage Dashboard is generally available on September 15 [F15] for all Enterprise customers [F16]. If you are an Enterprise admin, open the admin console to find it [F6], and consider setting your first budget alert so you hear from us at 80% and 100% of your budget [F10][F11].\n\nWe built the Usage Dashboard to give finance teams a clearer, earlier view of what they will owe, so the invoice at the end of the month holds fewer surprises [F2][F3].",
+    "detail": {}
+  },
+  {
+    "seq": 5,
+    "agent": "fact_check",
+    "attempt": 1,
+    "status": "fail",
+    "model": "claude-opus-5-5",
+    "input_tokens": 2332,
+    "output_tokens": 1247,
+    "cost_usd": 0.034268,
+    "latency_ms": 12340.472699987004,
+    "output": "```json\n{\n  \"issues\": [\n    {\n      \"sentence\": \"These results come from a single billing cycle, but they show the dashboard giving finance teams a reliable view of their upcoming invoice and reducing the volume of billing-related tickets [F13][F14].\",\n      \"problem\": \"This overstates the beta results. Calling the forecast 'reliable' glosses over the fact that it missed the 5% mark for 8 of 60 accounts (about 13%). The facts also only say tickets 'fell by 38%' in beta accounts. Nothing establishes that the dashboard caused the drop, so 'reducing' implies more than the data shows. Finally, the beta participants were 'enterprise accounts', not specifically finance teams.\"\n    },\n    {\n      \"sentence\": \"The dashboard is for visibility, not for making changes.\",\n      \"problem\": \"This overgeneralizes the non-goals. The PRD excludes only changing prices or plans (F18) and multi-currency invoices (F19). Admins can still set budget alerts in the dashboard (F10), so a blanket 'not for making changes' is inaccurate.\"\n    }\n  ]\n}\n```",
+    "detail": {
+      "issues": [
+        {
+          "sentence": "These results come from a single billing cycle, but they show the dashboard giving finance teams a reliable view of their upcoming invoice and reducing the volume of billing-related tickets [F13][F14].",
+          "problem": "This overstates the beta results. Calling the forecast 'reliable' glosses over the fact that it missed the 5% mark for 8 of 60 accounts (about 13%). The facts also only say tickets 'fell by 38%' in beta accounts. Nothing establishes that the dashboard caused the drop, so 'reducing' implies more than the data shows. Finally, the beta participants were 'enterprise accounts', not specifically finance teams."
+        },
+        {
+          "sentence": "The dashboard is for visibility, not for making changes.",
+          "problem": "This overgeneralizes the non-goals. The PRD excludes only changing prices or plans (F18) and multi-currency invoices (F19). Admins can still set budget alerts in the dashboard (F10), so a blanket 'not for making changes' is inaccurate."
+        }
+      ],
+      "llm_issues": 2,
+      "numeric_issues": 0
+    }
+  },
+  {
+    "seq": 6,
+    "agent": "write",
+    "attempt": 3,
+    "status": "ok",
+    "model": "claude-sonnet-5-5",
+    "input_tokens": 1996,
+    "output_tokens": 942,
+    "cost_usd": 0.013412,
+    "latency_ms": 7235.129799984861,
+    "output": "# Introducing the Usage Dashboard: Know Your Bill Before It Arrives\n\nUsage-based pricing gives customers flexibility, but it can also make invoices harder to predict. Today we're announcing the Usage Dashboard, also known as the Usage-Based Billing Dashboard [F1]. It shows customers, in near real time, what they are consuming and what their next invoice will be [F2]. Its purpose is simple: finance teams should never be surprised by a bill [F3].\n\n## Why we built it\n\nSince we moved to usage-based pricing, billing-related support tickets have tripled [F4]. Invoice disputes now take an average of 11 days to resolve [F5]. Those numbers told us customers needed a clearer view of what they were consuming and what they would owe.\n\n## What you get\n\nThe dashboard lives inside the admin console, so it is available where admins already work [F6]. It includes three main views:\n\n- **Daily usage per product.** See what you are consuming, broken out by product [F7].\n- **Month-to-date cost.** Track what you have accrued so far this month [F8].\n- **Month-end forecast.** See a forecast of your month-end invoice [F9].\n\nUsage data refreshes every 15 minutes, so what you see stays current throughout the day [F17].\n\n## Budget alerts that keep you ahead of the invoice\n\nAdmins can set budget alerts at any amount [F10]. Admins receive an email when 80% and 100% of the budget is reached [F11]. That gives your team a heads-up as spending approaches your limit, and another when you reach it.\n\n## What we saw in the beta\n\nBefore launch, 60 enterprise accounts used the dashboard for one billing cycle [F12]. For 52 of those 60 accounts, the month-end forecast was within 5% of the final invoice [F13]. For the remaining accounts, the forecast was not within that range, so we'd encourage you to treat the forecast as an estimate rather than a guarantee [F13].\n\nBilling-related tickets from beta accounts fell by 38% [F14]. This was a single billing cycle, and we can't say the dashboard alone caused the decline, but we are encouraged by the direction [F12][F14].\n\n## What the dashboard doesn't do\n\nWe want to be clear about scope. You can't change prices or plans from the dashboard [F18]. It also doesn't support multi-currency invoices [F19]. Within those limits, admins can still use it to set budget alerts [F10].\n\n## Availability\n\nThe Usage Dashboard is generally available on September 15 [F15]. It is available to all Enterprise customers [F16]. If you're an admin on an Enterprise account, open the admin console to start exploring your usage, your month-to-date cost and your forecast [F6][F7][F8][F9].\n\nWe built the Usage Dashboard so that your invoice is something you can anticipate, not something that catches you off guard [F3].",
+    "detail": {}
+  },
+  {
+    "seq": 7,
+    "agent": "fact_check",
+    "attempt": 1,
+    "status": "fail",
+    "model": "claude-opus-5-5",
+    "input_tokens": 2383,
+    "output_tokens": 803,
+    "cost_usd": 0.025592,
+    "latency_ms": 8427.452400006587,
+    "output": "```json\n{\n  \"issues\": [\n    {\n      \"sentence\": \"Usage-based pricing gives customers flexibility, but it can also make invoices harder to predict.\",\n      \"problem\": \"The claim that usage-based pricing 'gives customers flexibility' is not in the PRD or the facts, and the sentence has no citation. The PRD only says billing tickets tripled and disputes take 11 days after the pricing change. It does not mention any flexibility benefit.\"\n    }\n  ]\n}\n```",
+    "detail": {
+      "issues": [
+        {
+          "sentence": "Usage-based pricing gives customers flexibility, but it can also make invoices harder to predict.",
+          "problem": "The claim that usage-based pricing 'gives customers flexibility' is not in the PRD or the facts, and the sentence has no citation. The PRD only says billing tickets tripled and disputes take 11 days after the pricing change. It does not mention any flexibility benefit."
+        }
+      ],
+      "llm_issues": 1,
+      "numeric_issues": 0
+    }
+  }
+]
